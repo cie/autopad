@@ -1,9 +1,29 @@
-Feature: something something
-  In order to something something
-  A user something something
-  something something something
+Feature: autopadding
 
-  Scenario: something something
-    Given inspiration
-    When I create a sweet new gem
-    Then everyone should see how awesome I am
+    Scenario: All lines are aligned
+        When the input is:
+            """python
+            firstname = request.POST['firstname']
+            lastname = request.POST['lastname']
+            username = request.POST['username']
+            password = request.POST['password']
+            """
+        Then the output is:
+            """python
+            firstname = request.POST['firstname']
+            lastname  = request.POST['lastname']
+            username  = request.POST['username']
+            password  = request.POST['password']
+            """
+
+    Scenario: Indent is kept
+        When the input is:
+            """python
+            firstname = request.POST['firstname']
+              lastname = request.POST['lastname']
+            """
+        Then the output is:
+            """python
+            firstname  = request.POST['firstname']
+              lastname = request.POST['lastname']
+            """
